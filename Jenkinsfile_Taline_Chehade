@@ -31,8 +31,13 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Run pytest for unit testing
-                    bat "call ${VIRTUAL_ENV}\\Scripts\\activate && pytest"
+                    // Ensure we're in the correct working directory before running tests
+                    bat """
+                        cd ${env.WORKSPACE}  # Go to the root directory
+                        call ${VIRTUAL_ENV}\\Scripts\\activate
+                        set PYTHONPATH=%CD% 
+                        pytest tests\\test_app.py -v --tb=short
+                    """
                 }
             }
         }
