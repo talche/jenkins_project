@@ -67,10 +67,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Deployment logic can be added here
                     echo "Deploying application..."
-                    // Example deploy command for local or remote server
-                    bat "call deploy.bat"  // Make sure to adjust as necessary
+                    //local deployment
+                    bat "call deploy.bat"  
                 }
             }
         }
