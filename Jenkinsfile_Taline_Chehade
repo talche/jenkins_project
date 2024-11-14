@@ -42,11 +42,36 @@ pipeline {
             }
         }
 
+        stage('Coverage') {
+            steps {
+                script {
+                    // Run coverage to track test coverage
+                    bat """
+                        call ${VIRTUAL_ENV}\\Scripts\\activate
+                        coverage run -m pytest tests\\test_app.py
+                        coverage report  // Report coverage to the terminal
+                        coverage html    // Generate HTML report (optional)
+                    """
+                }
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                script {
+                    // Run bandit to check for security vulnerabilities
+                    bat "call ${VIRTUAL_ENV}\\Scripts\\activate && bandit -r app.py"
+                }
+            }
+        }
+
         stage('Deploy') {
             steps {
                 script {
                     // Deployment logic can be added here
                     echo "Deploying application..."
+                    // Example deploy command for local or remote server
+                    bat "call deploy.bat"  // Make sure to adjust as necessary
                 }
             }
         }
