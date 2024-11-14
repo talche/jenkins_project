@@ -49,8 +49,7 @@ pipeline {
                     bat """
                         call ${VIRTUAL_ENV}\\Scripts\\activate
                         coverage run -m pytest tests\\test_app.py
-                        coverage report  // Report coverage to the terminal
-                        coverage html    // Generate HTML report (optional)
+                        coverage report  
                     """
                 }
             }
