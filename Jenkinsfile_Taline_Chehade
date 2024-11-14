@@ -69,7 +69,7 @@ pipeline {
                 script {
                     echo "Deploying application..."
                     //local deployment
-                    bat "call deploy.bat"  
+                    bat 'deploy.bat' 
                 }
             }
         }
